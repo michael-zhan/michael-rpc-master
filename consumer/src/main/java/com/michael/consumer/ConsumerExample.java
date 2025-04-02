@@ -2,7 +2,10 @@ package com.michael.consumer;
 
 import com.michael.common.model.User;
 import com.michael.common.service.UserService;
+import com.michael.michael_rpc.RpcApplication;
 import com.michael.michael_rpc.proxy.ServiceProxyFactory;
+import com.michael.michael_rpc.registry.Registry;
+import com.michael.michael_rpc.registry.RegistryFactory;
 
 /**
  * @author Michael

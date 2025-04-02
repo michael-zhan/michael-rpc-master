@@ -1,0 +1,3 @@
+jdk=com.michael.michael_rpc.serializer.JdkSerializer
+json=com.michael.michael_rpc.serializer.JsonSerializer
+kryo=com.michael.michael_rpc.serializer.KryoSerializer

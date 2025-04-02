@@ -1,10 +1,13 @@
 package com.michael.michael_rpc.server;
 
+import cn.hutool.core.util.StrUtil;
+import com.michael.michael_rpc.RpcApplication;
+import com.michael.michael_rpc.model.RpcConfig;
 import com.michael.michael_rpc.model.RpcRequest;
 import com.michael.michael_rpc.model.RpcResponse;
 import com.michael.michael_rpc.register.LocalRegistry;
-import com.michael.michael_rpc.serializer.JdkSerializer;
 import com.michael.michael_rpc.serializer.Serializer;
+import com.michael.michael_rpc.serializer.SerializerFactory;
 import io.vertx.core.Handler;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerRequest;
@@ -19,9 +22,10 @@ import java.lang.reflect.Method;
 public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {
+        RpcConfig rpcConfig = RpcApplication.getRpcConfig();
         // 指定序列化器
-        Serializer serializer = new JdkSerializer();
-
+        String serializerType = rpcConfig.getSerializerType();
+        Serializer serializer= SerializerFactory.getInstance(serializerType);
         // 异步处理 Http Post 请求
         request.bodyHandler(buffer -> {
             byte[] bytes = buffer.getBytes();
