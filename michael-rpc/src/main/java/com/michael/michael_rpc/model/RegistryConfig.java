@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class RegistryConfig implements Serializable {
 
     private String registryType="etcd";
-    private String registryAddress;
+    private String registryAddress="http://localhost:2379";
     private String registryUsername;
     private String registryPassword;
     private Long registryTimeout=10000L;

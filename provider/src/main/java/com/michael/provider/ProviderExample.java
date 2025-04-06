@@ -22,11 +22,13 @@ public class ProviderExample {
         // 注册服务信息
         Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegistryType());
         ServiceMetaInfo serviceMetaInfo = new ServiceMetaInfo();
-        serviceMetaInfo.setServiceName("myService");
+        serviceMetaInfo.setServiceName(UserService.class.getName());
         serviceMetaInfo.setServiceHost(rpcConfig.getHost());
         serviceMetaInfo.setServicePort(rpcConfig.getPort());
+        serviceMetaInfo.setTimeout(30);
         registry.register(serviceMetaInfo);
-
+        // 服务启动
+        registry.heartBeat();
         vertxHttpServer.doStart(rpcConfig.getPort());
     }
 

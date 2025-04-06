@@ -20,18 +20,26 @@ public class RpcApplication {
      * 初始化
      */
     public static void init(){
-        RpcConfig loadRpcConfig=null;
-        RegistryConfig registryConfig=null;
+        RpcConfig loadRpcConfig;
+        RegistryConfig registryConfig;
         try {
             loadRpcConfig = ConfigUtil.loadConfig(RpcConfig.class, RpcConstant.CONFIG_PREFIX);
-            rpcConfig=loadRpcConfig;
             registryConfig = ConfigUtil.loadConfig(RegistryConfig.class, RpcConstant.REGISTRY_PREFIX);
+            rpcConfig=loadRpcConfig;
             rpcConfig.setRegistryConfig(registryConfig);
-            Registry registry = RegistryFactory.getInstance(registryConfig.getRegistryType());
-            registry.init(registryConfig);
         }catch (Exception e){
             rpcConfig=new RpcConfig();
         }
+        init(rpcConfig);
+
+    }
+
+    private static void init(RpcConfig usingRpcConfig){
+        Registry registry = RegistryFactory.getInstance(usingRpcConfig.getRegistryConfig().getRegistryType());
+        registry.init(usingRpcConfig.getRegistryConfig());
+
+        // 创建并注册 Shutdown Hook，JVM 退出时执行操作
+        Runtime.getRuntime().addShutdownHook(new Thread(registry::destroy));
     }
 
     /**

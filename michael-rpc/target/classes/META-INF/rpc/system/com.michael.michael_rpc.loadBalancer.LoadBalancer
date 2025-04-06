@@ -1,0 +1,4 @@
+roundrobin=com.michael.michael_rpc.loadBalancer.RoundRobinLoadBalancer
+consistenthash=com.michael.michael_rpc.loadBalancer.ConsistentHashLoadBalancer
+weightedroundrobin=com.michael.michael_rpc.loadBalancer.WeightedRoundRobinLoadBalancer
+random=com.michael.michael_rpc.loadBalancer.RandomLoadBalancer

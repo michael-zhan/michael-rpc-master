@@ -15,6 +15,7 @@ public class ServiceMetaInfo implements Serializable {
     private String serviceName;
     private String serviceHost;
     private int servicePort;
+    private long timeout;
 
     public String getServiceNodeKey(){
         return String.format("%s/%s:%s",serviceName,serviceHost,servicePort);
